@@ -40,7 +40,6 @@ do{
         alert(filtrados)
     }else if(opcion === 6){
         let listaVinos = "Seleccione número de item para agregar:\n0: para salir\n" + vinos.map(vino => vino.id + ": Marca: " + vino.nombreVino + " - " + vino.variedad + " - " + " PRECIO: $" + vino.valor).join("\n")
-        
         let idVino        
         do{               
             idVino = Number(prompt(listaVinos))
@@ -49,7 +48,8 @@ do{
                 let ubicacionVino = carritoVinos.findIndex(vino => vino.id === idVinoIngresado.id)
                 if (ubicacionVino != -1){                    
                     carritoVinos[ubicacionVino].cantidadUnidades++
-                    carritoVinos[ubicacionVino].subtotal = carritoVinos[ubicacionVino].valorUnidad * carritoVinos[ubicacionVino].cantidadUnidades                    
+                    carritoVinos[ubicacionVino].subtotal = carritoVinos[ubicacionVino].valorUnidad * carritoVinos[ubicacionVino].cantidadUnidades
+                    alert("Producto agregado al carrito")
                 }else{                    
                     carritoVinos.push({                        
                         id: idVinoIngresado.id,
@@ -58,11 +58,11 @@ do{
                         cantidadUnidades: 1,
                         valorUnidad: idVinoIngresado.valor,
                         subtotal: idVinoIngresado.valor
-                    })                   
+                    })
+                    alert("Producto agregado al carrito")                 
                 }                
             }                                       
-        }while (idVino != 0)
-        console.log(carritoVinos)        
+        }while (idVino != 0)             
     }else if(opcion === 7){
         let carrito = carritoVinos.map(vino => vino.id + ": Marca: " + vino.nombreVino + " - " + vino.variedad + " - " + " CANT.: " + vino.cantidadUnidades + " SUBTOTAL: $" + vino.subtotal).join("\n")
         alert(carrito)
