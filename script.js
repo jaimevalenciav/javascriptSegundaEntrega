@@ -10,6 +10,7 @@ let wines = [
     {id: 9, nombreVino: "Late Harvest", variedad: "Chardonnay", color: "blanco", valor: 6780}
 ]
 
+
 let vinos = wines.map(vino => {
     return new Vino(vino.id, vino.nombreVino, vino.variedad, vino.color, vino.valor)
 })
@@ -63,10 +64,14 @@ do{
                 }                
             }                                       
         }while (idVino != 0)             
-    }else if(opcion === 7){
-        let carrito = carritoVinos.map(vino => vino.id + ": Marca: " + vino.nombreVino + " - " + vino.variedad + " - " + " CANT.: " + vino.cantidadUnidades + " SUBTOTAL: $" + vino.subtotal).join("\n")
+    }else if(opcion === 7){        
+        let sumaSubtotales = carritoVinos.reduce(function(acumulador, valor){
+            return acumulador + valor.subtotal
+        }, 0)
+        let carrito = carritoVinos.map(vino => vino.id + ": Marca: " + vino.nombreVino + " - " + vino.variedad + " - " + " CANT.: " + vino.cantidadUnidades + " SUBTOTAL: $" + vino.subtotal).join("\n") + "\nTOTAL CARRITO: $" + sumaSubtotales
         alert(carrito)
     }
 }while (opcion != 0)
+
 
 
