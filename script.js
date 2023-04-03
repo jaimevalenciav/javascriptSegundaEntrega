@@ -10,7 +10,6 @@ let wines = [
     {id: 9, nombreVino: "Late Harvest", variedad: "Chardonnay", color: "blanco", valor: 6780}
 ]
 
-
 let vinos = wines.map(vino => {
     return new Vino(vino.id, vino.nombreVino, vino.variedad, vino.color, vino.valor)
 })
@@ -62,7 +61,7 @@ do{
                     })
                     alert("Producto agregado al carrito")                 
                 }                
-            }                                       
+            }                                      
         }while (idVino != 0)             
     }else if(opcion === 7){        
         let sumaSubtotales = carritoVinos.reduce(function(acumulador, valor){
