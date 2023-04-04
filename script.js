@@ -19,57 +19,66 @@ consulta = "Seleccione una opción a realizar: \n0: para salir\n1: para mostrar 
 let opcion
 do{
     opcion = Number(prompt(consulta)) 
-    if(opcion === 1){
-        let listaVinos= vinos.map(vino =>"MARCA: " + vino.nombreVino + " VARIEDAD: " + vino.variedad + " - "  + " PRECIO: $" + vino.valor).join("\n")
-        alert(listaVinos)
-    }else if(opcion === 2){
-        let filtradosTinto = vinos.filter(vino => vino.color == 'tinto')
-        let filtrados =  "LISTA DE VINOS TINTOS:\n" + filtradosTinto.map(filtrado =>"MARCA: " + filtrado.nombreVino + " VARIEDAD: " + filtrado.variedad + " - "  + " PRECIO: $" + filtrado.valor).join("\n")
-        alert(filtrados)
-    }else if(opcion === 3){
-        let filtradosBlanco = vinos.filter(vino => vino.color == 'blanco')
-        let filtrados =  "LISTA DE VINOS BLANCOS:\n" + filtradosBlanco.map(filtrado =>"MARCA: " + filtrado.nombreVino + " VARIEDAD: " + filtrado.variedad + " - "  + " PRECIO: $" + filtrado.valor).join("\n")
-        alert(filtrados)
-    }else if(opcion === 4){
-        let filtradosPrecioMenor4000 = vinos.filter(vino => vino.valor >= 0 && vino.valor <= 4000)
-        let filtrados = "LISTA DE VINOS VALOR MENOR A 4.000:\n" + filtradosPrecioMenor4000.map(filtrado =>"MARCA: " + filtrado.nombreVino + " VARIEDAD: " + filtrado.variedad + " - "  + " PRECIO: $" + filtrado.valor).join("\n")
-        alert(filtrados)
-    }else if(opcion === 5){
-        let filtradosPrecioMayor4000 = vinos.filter(vino => vino.valor > 4000 && vino.valor <= 10000)
-        let filtrados = "LISTA DE VINOS VALOR MAYOR A 4.000:\n" +filtradosPrecioMayor4000.map(filtrado =>"MARCA: " + filtrado.nombreVino + " VARIEDAD: " + filtrado.variedad + " - "  + " PRECIO: $" + filtrado.valor).join("\n")
-        alert(filtrados)
-    }else if(opcion === 6){
-        let listaVinos = "Seleccione número de item para agregar:\n0: para salir\n" + vinos.map(vino => vino.id + ": Marca: " + vino.nombreVino + " - " + vino.variedad + " - " + " PRECIO: $" + vino.valor).join("\n")
-        let idVino        
-        do{               
-            idVino = Number(prompt(listaVinos))
-            let idVinoIngresado = vinos.find(vino => vino.id === idVino)
-            if(idVinoIngresado){
-                let ubicacionVino = carritoVinos.findIndex(vino => vino.id === idVinoIngresado.id)
-                if (ubicacionVino != -1){                    
-                    carritoVinos[ubicacionVino].cantidadUnidades++
-                    carritoVinos[ubicacionVino].subtotal = carritoVinos[ubicacionVino].valorUnidad * carritoVinos[ubicacionVino].cantidadUnidades
-                    alert("Producto agregado al carrito")
-                }else{                    
-                    carritoVinos.push({                        
-                        id: idVinoIngresado.id,
-                        nombreVino: idVinoIngresado.nombreVino,
-                        variedad: idVinoIngresado.variedad,                        
-                        cantidadUnidades: 1,
-                        valorUnidad: idVinoIngresado.valor,
-                        subtotal: idVinoIngresado.valor
-                    })
-                    alert("Producto agregado al carrito")                 
-                }                
-            }                                      
-        }while (idVino != 0)             
-    }else if(opcion === 7){        
-        let sumaSubtotales = carritoVinos.reduce(function(acumulador, valor){
-            return acumulador + valor.subtotal
-        }, 0)
-        let carrito = carritoVinos.map(vino => vino.id + ": Marca: " + vino.nombreVino + " - " + vino.variedad + " - " + " CANT.: " + vino.cantidadUnidades + " SUBTOTAL: $" + vino.subtotal).join("\n") + "\nTOTAL CARRITO: $" + sumaSubtotales
-        alert(carrito)
-    }
+    let filtrados
+    let listaVinos
+    switch (opcion){
+        case "1":
+            listaVinos= vinos.map(vino =>"MARCA: " + vino.nombreVino + " VARIEDAD: " + vino.variedad + " - "  + " PRECIO: $" + vino.valor).join("\n")
+            alert(listaVinos)
+            break
+        case 2:
+            let filtradosTinto = vinos.filter(vino => vino.color == 'tinto')
+            filtrados =  "LISTA DE VINOS TINTOS:\n" + filtradosTinto.map(filtrado =>"MARCA: " + filtrado.nombreVino + " VARIEDAD: " + filtrado.variedad + " - "  + " PRECIO: $" + filtrado.valor).join("\n")
+            alert(filtrados)
+            break            
+        case 3:
+            let filtradosBlanco = vinos.filter(vino => vino.color == 'blanco')
+            filtrados =  "LISTA DE VINOS BLANCOS:\n" + filtradosBlanco.map(filtrado =>"MARCA: " + filtrado.nombreVino + " VARIEDAD: " + filtrado.variedad + " - "  + " PRECIO: $" + filtrado.valor).join("\n")
+            alert(filtrados)
+            break
+        case 4:
+            let filtradosPrecioMenor4000 = vinos.filter(vino => vino.valor >= 0 && vino.valor <= 4000)
+            filtrados = "LISTA DE VINOS VALOR MENOR A 4.000:\n" + filtradosPrecioMenor4000.map(filtrado =>"MARCA: " + filtrado.nombreVino + " VARIEDAD: " + filtrado.variedad + " - "  + " PRECIO: $" + filtrado.valor).join("\n")
+            alert(filtrados)
+            break            
+        case 5:
+            let filtradosPrecioMayor4000 = vinos.filter(vino => vino.valor > 4000 && vino.valor <= 10000)
+            filtrados = "LISTA DE VINOS VALOR MAYOR A 4.000:\n" +filtradosPrecioMayor4000.map(filtrado =>"MARCA: " + filtrado.nombreVino + " VARIEDAD: " + filtrado.variedad + " - "  + " PRECIO: $" + filtrado.valor).join("\n")
+            alert(filtrados)
+            break            
+        case 6:
+            listaVinos = "Seleccione número de item para agregar:\n0: para salir\n" + vinos.map(vino => vino.id + ": Marca: " + vino.nombreVino + " - " + vino.variedad + " - " + " PRECIO: $" + vino.valor).join("\n")
+            let idVino        
+            do{               
+                idVino = Number(prompt(listaVinos))
+                let idVinoIngresado = vinos.find(vino => vino.id === idVino)
+                if(idVinoIngresado){
+                    let ubicacionVino = carritoVinos.findIndex(vino => vino.id === idVinoIngresado.id)
+                    if (ubicacionVino != -1){                    
+                        carritoVinos[ubicacionVino].cantidadUnidades++
+                        carritoVinos[ubicacionVino].subtotal = carritoVinos[ubicacionVino].valorUnidad * carritoVinos[ubicacionVino].cantidadUnidades
+                        alert("Producto agregado al carrito")
+                    }else{                    
+                        carritoVinos.push({                        
+                            id: idVinoIngresado.id,
+                            nombreVino: idVinoIngresado.nombreVino,
+                            variedad: idVinoIngresado.variedad,                        
+                            cantidadUnidades: 1,
+                            valorUnidad: idVinoIngresado.valor,
+                            subtotal: idVinoIngresado.valor
+                        })
+                        alert("Producto agregado al carrito")                 
+                    }                
+                }                                      
+            }while (idVino != 0) 
+            break
+        case 7:
+            let sumaSubtotales = carritoVinos.reduce(function(acumulador, valor){
+                return acumulador + valor.subtotal
+            }, 0)
+            let carrito = carritoVinos.map(vino => vino.id + ": Marca: " + vino.nombreVino + " - " + vino.variedad + " - " + " CANT.: " + vino.cantidadUnidades + " SUBTOTAL: $" + vino.subtotal).join("\n") + "\nTOTAL CARRITO: $" + sumaSubtotales
+            alert(carrito)            
+    }    
 }while (opcion != 0)
 
 
